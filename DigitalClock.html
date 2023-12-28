@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DIGITAL CLOCK</title>
+        <style>
+            body{
+                background-image: url(nature.jpg);
+                background-size: cover ;
+                background-repeat: no-repeat;
+                margin: 0;
+            }
+            main{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: white;
+                align-items: center;
+                height: 100vh;
+            }
+            .clock-container{
+                font-family: Arial, Helvetica, sans-serif;
+                display: flex;
+                column-gap: 15px;
+                justify-content: center;
+                position: relative;
+                align-items: center;
+            }
+            .clock-container div{
+                display: flex;
+                flex-direction: column;
+            }
+            .hours-container,.min-container,.sec-container{
+                font-size: 3.5em;
+                padding: 15px;
+                background-color:rgba(0, 124, 0, 0.413);
+            }
+            .hours,.minutes,.seconds,.AM-PM{
+                text-align: center;
+                padding: 4px;
+                background-color:rgb(0, 124, 0);
+            }
+            .AM-PM{
+                margin-top: 95px;
+                background-color: rgba(3, 62, 130, 0.9) ;
+            }
+            .dig-clk{
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                margin-right: 20px;
+                margin-bottom: 10px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <main>
+            <div class="dig-clk">
+                DIGITAL CLOCK
+            </div>
+            <div class="clock-container">
+                <div>
+                    <div class="hours-container">
+                        12
+                    </div>
+                    <div class="hours">
+                        HOURS
+                    </div>
+                </div>
+                <div>
+                    <div class="min-container">
+                        20
+                    </div>
+                    <div class="minutes">
+                        MINUTES
+                    </div>
+                </div>
+                <div>
+                    <div class="sec-container">
+                        50
+                    </div>
+                    <div class="seconds">
+                        SECONDS
+                    </div>
+                </div>
+                <div class="AM-PM">
+                    <div class="AM-PM-container"></div>
+                    <div class="ampm">AM</div>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            let h=document.querySelector('.hours-container');
+            let m=document.querySelector('.min-container');
+            let s=document.querySelector('.sec-container');
+            let ap=document.querySelector('.ampm');
+
+
+            setInterval(()=>{
+                let date=new Date();
+                let hour=(date.getHours());
+                let min=String(date.getMinutes());
+                let sec=String(date.getSeconds());
+                date=date.toLocaleTimeString();
+                h.innerHTML=formathours(hour);
+                m.innerHTML=format(min);
+                s.innerHTML=format(sec);
+                ap.innerHTML=ampm(hour);
+            },1000);
+            function formathours(time){
+                if(time>12){
+                    time=time-12;
+                }
+                time=String(time);
+                if(time.length<12)
+                    return `0${time}`;
+            }
+
+            function format(time){
+                time=String(time);
+                if(time.length<2){
+                    return `0${time}`;
+                }
+                else{
+                    return time;
+                }
+            }
+
+            function ampm(time){
+                if(time>12){
+                    return `PM`;
+                }
+                else{
+                    return `AM`;
+                }
+            }
+        </script>
+    </body>
+</html>
